@@ -1,0 +1,21 @@
+{
+  "name": "LoopNet Academy",
+  "short_name": "LoopNet",
+  "description": "Laboratorio educativo de ciclos de programación, redes y automatización.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B2228",
+  "theme_color": "#0B2228",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Abrir simuladores", "url": "/simuladores" },
+    { "name": "Iniciar evaluación", "url": "/evaluacion" }
+  ]
+}
