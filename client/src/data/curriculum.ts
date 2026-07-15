@@ -34,13 +34,13 @@ export const modules: LearningModule[] = [
         title: "Iteración como automatización",
         summary: "Una iteración ejecuta de nuevo un bloque con un estado actualizado. La secuencia entrada → operación → cambio de estado → verificación define cada vuelta.",
         cycleConnection: "El ciclo transforma una tarea manual repetida en una regla verificable.",
-        example: "for intento in range(3): conectar()",
+        example: "for intento in range(3):\n    conectar()",
       },
       {
         title: "Bucles definidos: for",
         summary: "El bucle for recorre secuencias finitas: listas de IP, puertos, dispositivos o registros. El iterador identifica el elemento activo.",
         cycleConnection: "Cada elemento de la colección provoca una vuelta y el final de la colección cierra el ciclo.",
-        example: "for ip in [\"10.0.0.1\", \"10.0.0.2\"]: ping(ip)",
+        example: "for ip in [\"10.0.0.1\", \"10.0.0.2\"]:\n    ping(ip)",
       },
       {
         title: "Bucles condicionales: while",
@@ -49,10 +49,22 @@ export const modules: LearningModule[] = [
         example: "while intentos < 5:\n    intentos += 1",
       },
       {
-        title: "Optimización y seguridad",
+        title: "Comprensión de Listas",
+        summary: "Una forma concisa de crear listas aplicando un ciclo en una sola línea. Es más eficiente y legible para transformaciones simples.",
+        cycleConnection: "Compacta el ciclo de transformación en una expresión atómica.",
+        example: "[x**2 for x in range(10) if x % 2 == 0]",
+      },
+      {
+        title: "Control de Flujo: Break y Continue",
+        summary: "Break termina el ciclo prematuramente, mientras que Continue salta a la siguiente iteración.",
+        cycleConnection: "Permiten alterar la trayectoria lineal del ciclo ante señales específicas.",
+        example: "while True:\n    if data == 'END': break\n    process(data)",
+      },
+      {
+        title: "Optimización y Seguridad",
         summary: "Los bucles anidados amplifican el trabajo. Una condición que no cambia puede producir un ciclo infinito y bloquear recursos.",
         cycleConnection: "Todo ciclo operativo necesita progreso medible y una condición de salida alcanzable.",
-        example: "O(n) para un recorrido; O(n²) para dos recorridos anidados.",
+        example: "for i in range(n):\n    for j in range(n):\n        # O(n^2)",
       },
     ],
   },
@@ -145,28 +157,23 @@ const theorySeeds: Omit<ExamItem, "id">[] = [
   { bank: "Teoría", module: 1, prompt: "¿Qué condición garantiza que un bucle while pueda terminar?", options: ["La condición cambia hacia un valor falso", "El cuerpo contiene print", "Existe una lista", "La variable es global"], answer: 0, explanation: "La condición debe poder evolucionar hasta falso o existir una interrupción alcanzable." },
   { bank: "Teoría", module: 1, prompt: "¿Qué representa la variable de control en un for?", options: ["El elemento activo de la secuencia", "La dirección MAC local", "El tamaño del programa", "El proceso padre"], answer: 0, explanation: "En cada vuelta, la variable recibe el siguiente elemento del iterable." },
   { bank: "Teoría", module: 1, prompt: "¿Cuál es el efecto de continue?", options: ["Omite el resto de la vuelta actual", "Finaliza el programa", "Reinicia Python", "Duplica el iterable"], answer: 0, explanation: "continue salta directamente a la siguiente comprobación o iteración." },
-  { bank: "Teoría", module: 1, prompt: "¿Cuál es el coste típico de recorrer una lista una vez?", options: ["O(n)", "O(1)", "O(n²)", "O(2ⁿ)"], answer: 0, explanation: "El trabajo crece linealmente con el número de elementos." },
+  { bank: "Teoría", module: 1, prompt: "¿Cuál es el beneficio principal de List Comprehension?", options: ["Sintaxis concisa y mayor velocidad", "Elimina la necesidad de memoria", "Permite ciclos infinitos", "No requiere indentación"], answer: 0, explanation: "Permite crear listas de forma más compacta y eficiente que un bucle for tradicional." },
   { bank: "Teoría", module: 2, prompt: "¿Por qué una tormenta de broadcast puede crecer rápidamente?", options: ["Las tramas se replican y recirculan", "ARP asigna puertos", "TCP reduce el TTL", "DHCP cifra los enlaces"], answer: 0, explanation: "En un bucle de capa 2, los switches replican broadcasts que pueden circular indefinidamente." },
   { bank: "Teoría", module: 2, prompt: "¿Qué paso sigue a DHCP OFFER?", options: ["DHCP REQUEST", "DHCP DISCOVER", "DHCP RELEASE", "ARP REPLY"], answer: 0, explanation: "El cliente solicita formalmente la oferta seleccionada con DHCP REQUEST." },
   { bank: "Teoría", module: 2, prompt: "¿Qué conserva STP al bloquear un puerto?", options: ["La redundancia física sin ciclo lógico", "Dos root bridges activos", "Un broadcast permanente", "Todas las rutas en forwarding"], answer: 0, explanation: "El enlace permanece disponible como respaldo, pero no reenvía tráfico de usuario mientras está bloqueado." },
-  { bank: "Teoría", module: 2, prompt: "¿Qué resuelve ARP en una LAN IPv4?", options: ["IPv4 a dirección MAC", "MAC a puerto TCP", "DNS a VLAN", "TTL a métrica"], answer: 0, explanation: "ARP descubre la dirección de enlace asociada a una dirección IPv4 local." },
   { bank: "Teoría", module: 3, prompt: "¿Por qué un servidor usa un ciclo de aceptación?", options: ["Para atender conexiones sucesivas", "Para cambiar su IP", "Para evitar escuchar", "Para borrar el socket"], answer: 0, explanation: "Después de atender o delegar un cliente, el servidor vuelve a esperar el siguiente." },
-  { bank: "Teoría", module: 3, prompt: "¿Qué aporta una marca de tiempo a la telemetría?", options: ["Permite ordenar y correlacionar estados", "Aumenta el ancho de banda", "Sustituye SNMP", "Bloquea STP"], answer: 0, explanation: "La marca temporal convierte mediciones aisladas en una serie analizable." },
-  { bank: "Teoría", module: 3, prompt: "¿Qué riesgo existe al reducir demasiado el intervalo de polling?", options: ["Carga innecesaria en red y dispositivos", "Desactiva Ethernet", "Elimina direcciones IP", "Convierte TCP en UDP"], answer: 0, explanation: "Consultar con demasiada frecuencia consume recursos y puede distorsionar el sistema observado." },
   { bank: "Teoría", module: 3, prompt: "¿Qué ventaja ofrece iterar un inventario?", options: ["Aplicar una operación coherente a muchos equipos", "Evitar toda validación", "Ocultar los errores", "Eliminar la autenticación"], answer: 0, explanation: "La iteración permite ejecutar una regla común y registrar el resultado por dispositivo." },
 ];
 
-export const theoryBank: ExamItem[] = Array.from({ length: 100 }, (_, index) => {
+export const theoryBank: ExamItem[] = Array.from({ length: 60 }, (_, index) => {
   const seed = theorySeeds[index % theorySeeds.length];
-  const context = ["laboratorio", "práctica guiada", "diagnóstico", "operación supervisada"][Math.floor(index / theorySeeds.length) % 4];
-  return { ...seed, id: `T-${String(index + 1).padStart(3, "0")}`, prompt: `${seed.prompt} Contexto: ${context} ${index + 1}.` };
+  return { ...seed, id: `T-${String(index + 1).padStart(3, "0")}`, prompt: seed.prompt };
 });
 
-const pythonPractice = Array.from({ length: 50 }, (_, index): ExamItem => {
+const pythonPractice = Array.from({ length: 30 }, (_, index): ExamItem => {
   const limit = (index % 6) + 3;
   const stop = Math.floor(limit / 2);
-  const template = index % 2;
-  if (template === 0) {
+  if (index % 2 === 0) {
     return {
       id: `P-PY-${String(index + 1).padStart(2, "0")}`,
       bank: "Práctica",
@@ -190,31 +197,28 @@ const pythonPractice = Array.from({ length: 50 }, (_, index): ExamItem => {
   };
 });
 
-const networkPractice = Array.from({ length: 50 }, (_, index): ExamItem => {
+const networkPractice = Array.from({ length: 30 }, (_, index): ExamItem => {
   const hostBits = (index % 4) + 2;
-  const prefix = 32 - hostBits;
   const usable = 2 ** hostBits - 2;
   if (index % 2 === 0) {
     return {
       id: `P-NET-${String(index + 1).padStart(2, "0")}`,
       bank: "Práctica",
       module: 2,
-      prompt: `Un ping sweep autorizado recorre una red /${prefix}. ¿Cuántas direcciones de host utilizables evaluará?`,
-      options: [String(usable), String(2 ** hostBits), String(usable - 1), String(32 - prefix)],
+      prompt: `¿Cuántas direcciones utilizables hay en una red con ${hostBits} bits de host?`,
+      options: [String(usable), String(2 ** hostBits), String(usable + 2), String(hostBits)],
       answer: 0,
-      explanation: `Una /${prefix} contiene ${2 ** hostBits} direcciones; al excluir red y broadcast quedan ${usable}.`,
+      explanation: `Se restan 2 direcciones (red y broadcast) de las ${2 ** hostBits} posibles.`,
     };
   }
-  const rootCost = 4 + (index % 3) * 4;
-  const alternateCost = rootCost + 4;
   return {
     id: `P-NET-${String(index + 1).padStart(2, "0")}`,
     bank: "Práctica",
     module: 2,
-    prompt: "STP compara dos caminos al root bridge. ¿Cuál debe quedar como camino activo?",
-    options: [`El de coste ${rootCost}`, `El de coste ${alternateCost}`, "Ambos en forwarding", "El de mayor bridge ID"],
+    prompt: "STP detecta dos caminos al Root Bridge. ¿Cuál elige?",
+    options: ["El de menor coste acumulado", "El de mayor velocidad", "El que tiene menos saltos", "El de mayor IP"],
     answer: 0,
-    explanation: "STP prefiere el camino con menor coste acumulado hacia el root bridge.",
+    explanation: "STP siempre prioriza el camino con el menor coste hacia el puente raíz.",
   };
 });
 
